@@ -1,0 +1,72 @@
+*{
+    box-sizing: border-box;
+  }
+.h1 {
+  text-align: center;
+}
+  .hero {
+      align-items: center;
+      color: white;
+      padding-bottom: 0.5%;
+      border-radius: 0;   
+      background: linear-gradient(
+      to right,
+      purple,
+      limegreen
+  )}
+
+.starterColumn {
+    color: white;
+    opacity: 0.5;
+}
+
+body {
+    background-color: #cccccc;
+    background-size: 100%;
+    text-align: center;
+    color: black;
+  }
+
+
+.card {
+ position: relative;
+ top: -50px
+
+
+} 
+form {
+    width: 100%;
+    text-align: center;
+  }
+  
+form .form-group {
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin: 0.625rem 0;
+  }
+  
+form .form-input,
+form .form-textarea {
+    display: block;
+  }
+
+form .form-input {
+    width: 20%;
+    padding: 0.75rem;
+    color: #1a1a1a;
+    background-color: #ffffff;
+    margin: 0.625rem 0;
+    font-size: 1.2rem;
+    border: 1px solid #484848;
+    border-radius: 0.3rem;
+    display: inline-block;
+  }
+
+.signup-form .login-form {
+  color: white;
+}
+
+.jumbotron {
+  background: rgba(204, 204, 204, 0.685);
+}
