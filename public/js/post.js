@@ -1,25 +1,28 @@
 const newPost = async (event) => {
     event.preventDefault();
 
-    const postTitle = document.querySelector('input[name="postTitle"]').value;
-    const postURL = document.querySelector('input[name="postURL"]').value;
+    const postTitle = document.querySelector("#postTitle").value;
+    const postContents = document.querySelector("#postContents").value;
 
-    const response = await fetch(`/api/posts`, {
-        method: 'POST',
-        body: JSON.stringify({
-            postTitle,
-            postURL
-        }),
-        headers: {
-            'Content-Type': 'application/json'
+    if (postTitle && postContents) {
+        const response = await fetch(`/api/posts/dashboard`, {
+            method: 'POST',
+            body: JSON.stringify({
+                postTitle,
+                postContents,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+            alert("The blog post could not be created");
         }
-    });
-
-    if (response.ok) {
-        document.location.replace('/dashboard');
-    } else {
-        alert(response.statusText);
     }
-}
+};
 
-document.querySelector('.newPost').addEventListener('submit', newPost)
+document.querySelector('.newPost')
+.addEventListener('submit', newPost)

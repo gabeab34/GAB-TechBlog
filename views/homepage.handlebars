@@ -1,0 +1,26 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<header class="hero bg-primary navbar sticky-top">
+
+  <h1>
+    Welcome!
+
+  </h1>
+  {{!-- {{#if logged_in}} --}}
+  <nav>
+    <button class="btn btn-outline-dark" id="logout">Logout</button>
+    <button class="btn btn-outline-dark" id="dashboard"><a href="/dashboard">Dashboard</a></button>
+  </nav>
+  {{!-- {{/if}} --}}
+</header>
+    <ol class="post-list">
+    {{#each posts as |post|}}
+  <li>
+    {{> post-info post}}
+  </li>
+  {{/each}}
+</ol>
+<script src="/js/logout.js"></script>
+</section>
+</body>

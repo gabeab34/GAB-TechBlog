@@ -11,18 +11,15 @@ Post.init(
             primaryKey: true,
             autoIncrement: true
         },
-        postURL: {
+        postContents: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                isURL: true
-            }
         },
         postTitle: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        userID: {
+        userId: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'user',
