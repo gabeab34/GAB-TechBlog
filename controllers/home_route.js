@@ -48,12 +48,16 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.get("/dashboard", (req, res) => {
-  res.render("dashboard");
+router.get("/dashboard", withAuth, (req, res) => {
+  res.render("dashboard", {
+    logged_in: req.session.logged_in,
+  })
 });
 
-router.get("/homepage", (req, res) => {
-  res.render("homepage");
+router.get("/", withAuth, (req, res) => {
+  res.render("homepage", {
+    logged_in: req.session.logged_in,
+  })
 });
 
 module.exports = router;
