@@ -2,7 +2,6 @@
     <h1>
       Welcome! 
     </h1>
-
     
     <nav>
       {{#if logged_in}}
@@ -15,15 +14,26 @@
       {{/unless}}
     </nav>
      
-</header>
- 
-  
+  </header>
 
+{{> post-info post}}
 
+{{#if logged_in}}
+<div class="card">
+    <h3 class="card-header"></h3>
+    <form class="card-body comment-form" id="comment-form">
 
-  <article class="post-list">
-    {{#each posts as |post|}}
-        {{> post-info post}}
-    {{/each}}
-  </article>
+        <label class="form-label">Comment</label>
+        <input id="comment" name="comment-body" class="form-input" />
 
+        <button type="submit" class="btn btn-outline-dark">Submit Comment!</button>
+    </form>
+</div>
+{{/if}}
+
+{{> comments post.comments}}
+
+{{#if logged_in}}
+
+<script src="/js/comment.js"></script>
+{{/if}}

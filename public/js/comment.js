@@ -1,14 +1,14 @@
 const newComment = async (event) => {
     event.preventDefault();
 
-    const comment = document.querySelector('textarea[name="comment"]').value.trim()
-    const postID = location.toString().split('/')[ location.toString().split('/').length -1 ]
+    const comment = document.querySelector('#comment').value.trim()
+    const post_id = location.toString().split('/')[ location.toString().split('/').length -1 ]
 
     if (comment) {
         const comments = await fetch('/api/comments', {
             method: 'POST',
             body: JSON.stringify({
-                postID,
+                post_id,
                 comment
             }),
             headers: {
@@ -24,4 +24,4 @@ const newComment = async (event) => {
     }
 }
 
-document.querySelector('.newPost').addEventListener('submit', newComment)
+document.querySelector('#comment-form').addEventListener('submit', newComment)

@@ -1,0 +1,55 @@
+<header class="hero bg-primary navbar sticky-top">
+    <h1>
+      Dashboard
+    </h1>
+      <nav>
+    <button class="btn btn-outline-dark" id="logout">Logout</button>
+    <button class="btn btn-outline-dark" id="homepage"><a href="/">Homepage</a></button>
+    </nav>
+  </header>
+
+<section class="vh-50">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem; background-color:rgba(204, 204, 204, 0.685);">
+          <div class="div-center">
+            <div class="d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form class="newPost">
+
+                  <div class="div-center">
+                    <h2>Create a new blog post</h2>
+                    {{!-- <img width="400" height="200" class="img-responsive" src="https://giffiles.alphacoders.com/649/6490.gif" alt="Gif ID: 6490" title="Anime Dragon Ball Z Gif"> --}}
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Fill in the forms below</h5>
+
+                  <div class="form-outline mb-4">
+                    <input type="form" id="postTitle" class="form-control form-control-md" />
+                    <label class="form-label" for="postTitle">Title</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="form" id="postContents" class="form-control form-control-md" />
+                    <label class="form-label" for="postContents">Contents</label>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button class="btn btn-dark btn-lg" type="submit">Post!</button>
+                  </div>
+
+                  
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/post.js"></script>

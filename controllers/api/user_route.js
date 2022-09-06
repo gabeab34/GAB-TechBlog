@@ -1,27 +1,35 @@
 const router = require("express").Router();
 const { User, Post } = require("../../models");
 
-router.post("/login", async (req, res) => {
-  try {
-    const userData = await User.findOne({ where: { username: req.body.username} });
+router.post('/login', (req, res) => {
+  User.findOne({
+          where: {
+              username: req.body.username
+          }
+      }).then(userData => {
+          if (!userData) {
+              res.status(400).json({ message: 'There is no user with that username' });
+              return;
+          }
+          const validPassword = userData.checkPassword(req.body.password);
 
-    if (!userData) {
-      res.status(400).json({ message: "User not found" });
-      return;
-    }
-    const validPassword = await userData.checkPassword(req.body.password);
-    if (!validPassword) {
-      res.status(404).json({ message: "Invalid password, please try again" });
-      return;
-    }
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-      res.json({ user: userData, message: "You are now logged in!" });
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
+          if (!validPassword) {
+              res.status(400).json({ message: 'Password is not correct for this user!' });
+              return;
+          }
+          req.session.save(() => {
+
+              req.session.user_id = userData.id;
+              req.session.username = userData.username;
+              req.session.logged_in = true;
+
+              res.json({ user: userData, message: 'You are now logged in!' });
+          });
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+      });
 });
 
 router.post("/signup", (req, res) => {

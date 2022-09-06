@@ -3,20 +3,27 @@ const sequelize = require('../config/connection');
 const withAuth = require('../utils/auth');
 const { Post, User, Comment } = require('../models');
 
+router.get('/new', (req, res) => {
+  res.render('new-post');
+});
+
 router.get('/', withAuth, (req, res) => {
+  console.log('hi')
   Post.findAll({
       where: {
-        username: req.session.username
+        user_id: req.session.user_id
       },
       attributes: [
         'id',
-        'postURL',
         'postTitle',
+        'postContents',
+        'created_at'
+        
       ],
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment', 'postID', 'userID'],
+          attributes: ['id', 'comment', 'post_id', 'user_id'],
           include: {
             model: User,
             attributes: ['username']
@@ -30,7 +37,8 @@ router.get('/', withAuth, (req, res) => {
     })
       .then(postData => {
         const posts = postData.map(post => post.get({ plain: true }));
-        res.render('dashboard', { posts, loggedIn: true });
+        console.log("Data: ", posts)
+        res.render('dashboard', { posts, logged_in: true });
       })
       .catch(err => {
         console.log(err);
@@ -43,15 +51,15 @@ router.get('/edit/:id', withAuth, (req, res) => {
     where: {
         id: req.params.id
     },
-    attributes: ['id', 'postURL', 'postTitle' ],
+    attributes: ['id', 'postContents', 'postTitle' ],
     include: [
         {
             model: Comment,
             attributes: [
                 'id',
                 'comment',
-                'userID',
-                'postID',
+                'user_id',
+                'post_id',
             ],
             include: {
                 model: User,
@@ -70,7 +78,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
         
         res.render('edit-post', {
           post,
-          loggedIn: true
+          logged_in: true
         });
       } else {
         res.status(404).end();

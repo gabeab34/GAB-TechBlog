@@ -2,10 +2,11 @@ const router = require('express').Router();
 const withAuth = require('../../utils/auth');
 const { Post, User, Comment } = require('../../models');
 
-router.post('/dashboard', withAuth, (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Post.create({
         postTitle: req.body.postTitle,
         postContents: req.body.postContents,
+        user_id: req.session.user_id
         })
         .then(postData => res.json(postData))
         .catch(err => {
@@ -18,8 +19,10 @@ router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
             'id',
+            'postTitle', 
             'postContents', 
-            'postTitle'         
+            'created_at'
+                    
         ],
         include: [
             {
@@ -27,8 +30,9 @@ router.get('/', (req, res) => {
                 attributes: [
                     'id',
                     'comment',
-                    'postId',
-                    'userId',
+                    'post_id',
+                    'user_id',
+                    'created_at'
                     
                 ],
                 include: {
@@ -42,7 +46,10 @@ router.get('/', (req, res) => {
             }
         ]
     })
-        .then(postData => res.json(postData))
+        .then(postData => {
+            const posts = postData.map(post => post.get({ plain: true }));
+            res.render('dashboard', { posts, logged_in: true });
+        })    
         .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -61,8 +68,8 @@ router.get('/:id', (req, res) => {
                 attributes: [
                     'id',
                     'comment',
-                    'postId',
-                    'userId',
+                    'post_id',
+                    'user_id',
                     
                 ],
                 include: {
