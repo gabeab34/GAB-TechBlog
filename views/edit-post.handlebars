@@ -1,15 +1,33 @@
+  <header class="hero bg-primary navbar sticky-top">
+    <h1>
+      Edit Post
+    </h1>
+
+    
+    <nav>
+      {{#if logged_in}}
+      <button class="btn btn-outline-dark" id="logout">Logout</button>
+      <button class="btn btn-outline-dark" id="dashboard"><a href="/dashboard">Dashboard</a></button>
+      {{/if}}
+      {{#unless logged_in}}
+      <a type="button" class="btn btn-outline-dark" href="/login">Login!</a>
+      <a type="button" class="btn btn-outline-dark" href="/signup">Sign Up!</a>
+      {{/unless}}
+    </nav>
+    </header>
+
 <div class="card">
-    <h3 class="card-header">Edit Post</h3>
+    <h3 class="card-header"> Change the fields below to edit your post </h3>
     <form class="card-body edit-post-form">
         <label for="post-title" class="form-label">Title</label>
-        <input name="post-title" type="text" value="{{post.postTitle}}" class="form-input" />
+        <input name="postTitle" type="text" value="{{post.postTitle}}" class="form-input" />
         <label class="form-label" for="content">Content</label>
-        <input name="content" type="text" value="{{post.postContents}}" class="form-input" />
-        <button type="submit" class="btn">Update Post</button>
-        <button type="button" class="delete-post-btn btn">Delete Post</button>
+        <input name="postContents" type="text" value="{{post.postContents}}" class="form-input" />
+        <button type="submit" class="btn btn-outline-dark">Update Post</button>
+        <button type="button" class="delete-post-btn btn btn-outline-dark">Delete Post</button>
     </form>
 </div>
 
 
-<script src="/javascript/edit.js"></script>
-<script src="/javascript/delete.js"></script>
+<script src="/js/edit.js"></script>
+<script src="/js/delete.js"></script>
