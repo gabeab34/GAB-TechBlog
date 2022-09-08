@@ -27,7 +27,7 @@
   npm i, npm i bcypt, npm i mysql2, npm i sequelize, npm i express-handlebars, npm i express-session
   
   ## Usage: 
-  Deployed on Heroku:
+  Deployed on Heroku: https://techblog-gab.herokuapp.com/
 
   ## License:
   none 
